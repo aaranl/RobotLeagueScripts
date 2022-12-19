@@ -1,48 +1,41 @@
-import javax.swing.*;
+import org.opencv.core.Mat;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 
 public class LoLScript {
-    public static void main(String[] args) {
-        // Set the dimensions of the region of the screen that you want to capture
-        int x = 1500;
-        int y = 660;
-        int width = 450;
-        int height = 450;
-        Rectangle screenRect = new Rectangle(x, y, width, height);
+    public static void main(String[] args) throws AWTException, IOException {
+        Robot robot = new Robot();
+        Rectangle trackingArea = new Rectangle(1500, 660, 450, 450);
 
-        // Create a Robot object to take the screenshot
-        Robot robot;
-        try {
-            robot = new Robot();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        ImageTracker2 answer = new ImageTracker2();
 
-        // Set up a JFrame and JPanel to display the screenshot
-        JFrame frame = new JFrame("Screenshot");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(java.awt.Graphics g) {
-                super.paintComponent(g);
-                BufferedImage image = robot.createScreenCapture(screenRect);
-                g.drawImage(image, 0, 0, null);
-            }
-        };
-        frame.add(panel);
-        frame.setSize(450, 450);
-        frame.setVisible(true);
 
-        // Update the screenshot every 100 milliseconds
-        while (true) {
-            SwingUtilities.invokeLater(() -> panel.repaint());
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
+
+        BufferedImage entry = null;
+        BufferedImage icon = ImageIO.read(new File("src/LeagueEzreal.png"));
+        BufferedImage screenshot = robot.createScreenCapture(trackingArea);
+        Mat mapImg = answer.imageToMat(screenshot);
+        Mat iconImg = answer.imageToMat(icon);
+
+        answer.setImageTracker2(trackingArea, iconImg, mapImg, icon, entry, screenshot);
+
+        answer.matchingTool(icon, trackingArea);
+
+
+        answer.setImageTracker2(trackingArea, iconImg, mapImg, icon, entry, screenshot);
+
+
+
+        //ScreenshotTaker taker = new ScreenshotTaker(1500, 660, 450, 450);
+       // taker.start();
+
+
+
     }
 }
