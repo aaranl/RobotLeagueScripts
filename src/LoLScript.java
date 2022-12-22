@@ -14,7 +14,7 @@ public class LoLScript {
     public static void main(String[] args) throws Exception {
         try {
             String inFile = "champions/Ezreal_OriginalCircle.png";
-            String template = "src/screenshot.png";
+            String template = "screenshot.png";
             String outFile = "cool.png";
             Rectangle trackingArea = new Rectangle(1500, 650, 450, 450);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -22,7 +22,7 @@ public class LoLScript {
 
             while (true) {
                 BufferedImage screenCapture = robot.createScreenCapture(trackingArea);
-                ImageIO.write(screenCapture, "png", new File("src/screenshot.png"));
+                ImageIO.write(screenCapture, "png", new File("screenshot.png"));
                 new MatchTemplate().run(template, inFile, outFile, Imgproc.TM_CCOEFF);
             }
         } catch (Exception e) {
