@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ScreenshotTaker {
+public class ScreenCapture {
     private int x;
     private int y;
     private int width;
@@ -11,7 +11,8 @@ public class ScreenshotTaker {
     private JFrame frame;
     private JPanel panel;
 
-    public ScreenshotTaker(int x, int y, int width, int height) {
+
+    public ScreenCapture(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
